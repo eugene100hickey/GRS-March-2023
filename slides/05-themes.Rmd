@@ -1,0 +1,513 @@
+---
+title: "GRS Workshop<br>Introduction to ggplot"
+subtitle: "fonts and themes"
+session: "15:00-16:00"
+author: "Eugene Hickey"
+institute: "Technological University Dublin"
+date: "March 14th 2023"
+output:
+  xaringan::moon_reader:
+    css: 
+      - default
+      - css/mytheme.css
+      - css/mytheme-fonts.css
+    lib_dir: libs
+    includes:
+      in_header: favicon.html
+    seal: false
+    self_contained: true
+    nature:
+      highlightStyle: googlecode
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "macros.js"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+```{r meta, echo=FALSE, message=FALSE, warning=FALSE}
+library(metathis)
+meta() %>%
+  meta_general(
+    description = "An Introduction ggplot",
+    generator = "xaringan and remark.js"
+  ) %>% 
+  meta_name("github-repo" = "eugene100hickey/grs-march-2023") %>% 
+  meta_social(
+    title = "Introduction to ggplot",
+    url = "https://grs-2023.netlify.app",
+    image = "img/flowers.JPG",
+    image_alt = "Front page for Introduction to ggplot",
+    og_type = "website",
+    og_author = "Eugene Hickey",
+    twitter_card_type = "summary_large_image",
+    twitter_creator = "@eugene100hickey"
+  )
+```
+
+
+```{r setup, include = FALSE}
+options(htmltools.dir.version = FALSE)
+library(tidyverse)
+library(scales)
+library(gapminder)
+library(ggrepel)
+library(glue)
+library(waffle)
+library(treemapify)
+library(ggridges)
+library(lubridate)
+library(boxoffice)
+library(knitr)
+library(xaringanExtra)
+library(flipbookr)
+library(ggtext)
+library(hrbrthemes)
+library(HistData)
+library(patchwork)
+library(dslabs)
+library(ggalt)
+library(ggthemes)
+library(thematic)
+library(showtext)
+# set default options
+opts_chunk$set(echo=FALSE,
+               collapse = TRUE,
+               # fig.width = 7.252,
+               # fig.height = 4,
+               dpi = 300,
+               cache = TRUE,
+               message = FALSE,
+               warning = FALSE)
+
+xaringanExtra::use_tile_view()
+xaringanExtra::use_panelset()
+xaringanExtra::use_clipboard()
+xaringanExtra::use_webcam()
+xaringanExtra::use_broadcast()
+xaringanExtra::use_share_again()
+xaringanExtra::style_share_again(
+  share_buttons = c("twitter", "linkedin", "pocket")
+)
+
+```
+
+class: title-slide, right, top
+background-image: url(img/horn.JPG)
+background-position: 90% 75%, 75% 75%
+background-size:cover
+
+.left-column[
+# `r rmarkdown::metadata$title`
+]
+
+.right-column[
+### `r rmarkdown::metadata$subtitle`
+
+**`r rmarkdown::metadata$author`**<br>
+`r rmarkdown::metadata$date`
+]
+
+
+.palegrey[.left[.footnote[Graphic by [Elaine Hickey](https://photos.google.com/photo/AF1QipMjKNoaxyne8nte4HmxA6Th9-4fUfSbl_mx-_1G)]]]
+
+???
+
+Welcome to the workshop on ggplot.
+
+Where we'll show you how to create impressive data visualisations.
+
+---
+
+layout: true
+
+<a class="footer-link" href="http://grs-2023.netlify.app">GRS 2023 &mdash; Eugene Hickey</a>
+
+<!-- this adds the link footer to all slides, depends on footer-link class in css-->
+
+---
+
+
+class: center, inverse
+
+# <p style="font-family:'Cabin Sketch'">Using Themes in R</p>
+<br>
+
+### We'll also discuss fonts (first) and scales.
+
+- themes give fine control to the appearance of your plots
+    - control over text size, fonts, text colour, etc
+    - position of legends, titles, captions, etc
+    - colours of backgrounds
+    - delete unwanted features (like, say, tick marks on an axis)
+- large number of preset themes
+- several packages with neat bundle of useful themes
+    - we'll discuss some of these later
+- and, of course, we can develop our own theme to have consistent graphics
+
+---
+
+## Fonts
+
+- we'll discuss this first, as often themes require fonts which might not be present
+- fonts are a whole world of their own
+- see [practicaltypography.com](practicaltypography.com)
+- great talk by [Will Chase](https://rstudio.com/resources/rstudioconf-2020/the-glamour-of-graphics/) at RStudioConf2020
+
+---
+
+```{r, echo=FALSE, out.width="50%"}
+knitr::include_graphics("img/youll-always-be-mine.jpg")
+```
+
+
+---
+
+![](img/Bad_Font_Choices_-_Megaflicks.jpg)
+---
+
+![](img/Bad_Font_Choices_-_My_Favorite_Color_Is_Glitter.jpg)
+---
+
+![](img/Bad_Font_Choices_-_Kickboxing.jpg)
+
+
+---
+
+- need to add fonts before we can use them
+- simplest way is using *font_add_google* from the [showtext](https://github.com/yixuan/showtext) package
+
+.pull-left[
+
+```{r font_add_google, echo = T, message = FALSE, warning = FALSE, eval=FALSE}
+theme_update(text = element_text(size = 32))
+library(showtext)
+font_add_google(name = "Covered By Your Grace", 
+                family = "grace")
+{{showtext_auto()}}
+msleep %>% ggplot(aes(x = bodywt, 
+                      y = brainwt, 
+                      colour = order)) + 
+  geom_point(show.legend = F) + 
+  scale_x_log10(labels = scales::label_comma()) + 
+  scale_y_log10(labels = scales::label_comma()) + 
+  labs(title = "Bigger Animals-Bigger Brains") +
+  {{theme(text = element_text(family = "grace"))}}
+```
+]
+
+.pull-right[
+```{r font_add_google-out, ref.label="font_add_google", echo=FALSE}
+```
+]
+
+---
+
+- what if we want more than just the google fonts
+- download font from the web (need *.ttf* file)
+    - see [fonts.google.com](https://fonts.google.com/)
+    - or [fontsquirrel.com](https://www.fontsquirrel.com/)
+    - or [1001freefonts.com](https://www.1001freefonts.com/)
+- use *showtext::font_add(family = "some neat font name", regular = "path/to/downloaded.ttf")* where we give the directory where we downloaded the .ttf file
+- again, need *showtext_auto()* to make them live
+
+---
+
+- above processes have to be carried out every time we run R
+- can make them permanently available too
+- need to be in the system, load them into windows / mac / linux
+    - only really works for true type fonts (.ttf)
+    - go to folder where the R library lives and seek out fonts
+        - type **.libPaths()** to find out where
+    - e.g. R/x86_64-pc/3.6/tvthemes/fonts/SpongeBob
+    - click on .ttf files to install
+- then need to capture them  in R
+    - install package *extrafont*
+    - run *ttf_import()* with path = folder from above
+    - run *View(fonttable())* to check available fonts
+    - usually need to restart R (*Session* then *Restart R*)
+- alternative is to use [thematic](remotes::install_github("rstudio/thematic"), see below
+
+
+---
+
+```{r font-quiz, echo=FALSE}
+xaringanExtra::embed_xaringan(url = "https://eugene-hickey.shinyapps.io/fonts/", ratio = "16:9")
+```
+
+---
+
+## Complete Themes
+- these set up ggplots with standard appearances
+- can always adjust these, but do so in a layer after invoking the theme
+- some defaults in ggplot2, see [here](https://ggplot2.tidyverse.org/reference/ggtheme.html)
+- you should experiment with these to see how they look
+
+---
+
+
+`r chunk_reveal("my_rotate1", break_type = "rotate", widths = c(50,50))`
+
+```{r my_rotate1, eval = F, echo = F}
+palmerpenguins::penguins %>% ggplot(aes(body_mass_g, flipper_length_mm, col = island)) +
+  geom_point() +
+  theme_classic() + #ROTATE
+  theme_dark() + #ROTATE
+  theme_excel() + #ROTATE
+  theme_economist() + #ROTATE
+  theme_fivethirtyeight() + #ROTATE
+  theme_wsj()#ROTATE
+```
+
+
+---
+
+## Complete Themes
+
+- other package provide supplementary themes
+    - *ggthemes*
+    - *ggthemr* (see [here](https://github.com/cttobin/ggthemr))
+    - *tvthemes* (see [here](https://ryo-n7.github.io/2019-05-16-introducing-tvthemes-package/))
+    - *hrbrthemes* see [here](https://github.com/hrbrmstr/hrbrthemes)
+    - *firatheme* (see [here](https://github.com/vankesteren/firatheme))
+    - *bbplot*, themes from the BBC (see [here](https://github.com/bbc/bbplot))
+    - *ggtech* themes from companies, e.g. Facebook. See [here](https://github.com/ricardo-bion/ggtech)
+- [This website](https://rfortherestofus.com/2019/08/themes-to-improve-your-ggplot-figures/) is pretty good on themes
+- again, make sure you experiment with these
+- have to mention [thematic](remotes::install_github("rstudio/thematic")) here, simplifies adding google fonts too.
+
+---
+
+## thematic example
+
+.pull-left[
+
+```{r thematic-example, echo=TRUE, eval=FALSE}
+thematic_on(bg = "#111111", fg = "white", accent = "#0CE3AC", font = "Permanent Marker")
+
+gapminder::gapminder %>% 
+  dplyr::filter(year == "2007", continent == "Europe") %>% 
+  ggplot(aes(lifeExp, gdpPercap, label = country, colour = pop)) +
+  geom_point(show.legend = FALSE) + 
+  ggrepel::geom_text_repel(show.legend = FALSE)
+
+{{thematic_off()}}
+```
+
+]
+
+.pull-right[
+
+```{r thematic-example-out, ref.label="thematic-example", echo=FALSE, fig.height=6}
+```
+
+]
+
+
+---
+
+
+## Fine Control Over Themes
+
+.panelset[
+.panel[
+.panel-name[Themes]
+
+.pull-left[
+
+- we can change any feature of a theme that we want
+- type *?theme* on the console to see available themes
+    - there are a lot of themes
+- use *element_&&&&&* to replace theme
+- example: *theme(text = element_text(family = "Roboto Sans"))*
+
+]
+
+.pull-right[
+
+![](img/theme.gif)
+
+]
+
+] <!-- close first panel -->
+
+.panel[
+.panel-name[Change Font]
+
+.pull-left[
+
+```{r themes3, echo=T, eval=F}
+font_add("Cabin Sketch", 
+         regular = "fonts/CabinSketch-Regular.ttf")
+showtext_auto()
+
+palmerpenguins::penguins %>% ggplot(aes(body_mass_g, flipper_length_mm, col = island)) + 
+  geom_point() +
+  labs(x = "Body mass(g)", y = "Flipper Length (mm)") +
+  theme(text = element_text(family = "Cabin Sketch", 
+                            size = 24, 
+                            face = "bold"))
+```
+
+]
+
+.pull-right[
+
+```{r themes3-out, ref.label="themes3", echo=FALSE, fig.height=4}
+```
+
+]
+
+] <!-- close second panel -->
+
+.panel[
+.panel-name[Change Legend]
+.pull-left[
+
+```{r themes4, echo=T, eval=F}
+palmerpenguins::penguins %>% 
+  ggplot(aes(body_mass_g, 
+             flipper_length_mm, 
+             col = island)) +
+  geom_point() +
+  labs(x = "Body mass(g)", y = "Flipper Length (mm)") +
+  theme(legend.position = "bottom", 
+        axis.text.y = element_blank())
+```
+
+]
+
+.pull-right[
+
+```{r themes4-out, ref.label="themes4", echo=FALSE, fig.height=4}
+```
+
+]
+
+] <!-- close third panel -->
+
+] <!-- close panelset -->
+
+---
+
+- *theme_set()*, *theme_get()*, and *theme_update()* pretty useful
+
+.pull-left[
+
+```{r themes5, echo=T, eval=F, message=F, warning=F}
+font_add("Fiendish", 
+         "fonts/Fiendish.ttf")
+showtext_auto()
+
+theme_update(text = element_text(family = "Fiendish",
+                                 size = 18,
+                                 colour = "#691740", 
+                                 face = "bold"))
+
+palmerpenguins::penguins %>% 
+  ggplot(aes(body_mass_g, 
+             flipper_length_mm, 
+             col = island)) +
+  geom_point()
+```
+
+]
+
+.pull-right[
+
+```{r themes5-out, ref.label="themes5", echo=FALSE}
+```
+
+] 
+---
+
+.pull-left[
+
+```{r teeth, message=F, warning=F, echo=T, eval=F}
+font_add("Get Schwifty", 
+         regular = "fonts/get_schwifty.ttf")
+showtext_auto()
+
+theme_bluewhite <- function (base_size = 11, 
+                             base_family = "Get Schwifty") 
+  {
+    theme_bw() %+replace% 
+    theme( text = element_text(size = base_size, family = base_family),
+      panel.grid.major  = element_line(color = "white"),
+      panel.background = element_rect(fill = "lightblue"),
+      panel.border = element_rect(color = "lightblue", fill = NA),
+      axis.line = element_line(color = "lightblue"),
+      axis.ticks = element_line(color = "lightblue"),
+      axis.text = element_text(color = "steelblue")
+      )
+}
+
+# Using our new theme
+ggplot(ToothGrowth, aes(factor(dose), len)) + 
+  geom_boxplot() +
+  theme_bluewhite(base_size = 24) +
+  labs(x = "Supplement Dose (mg/day)",
+       y = "Tooth Length (mm)")
+```
+
+]
+
+.pull-right[
+
+```{r teeth-out, ref.label="teeth", echo=FALSE}
+```
+
+]
+---
+
+
+
+class: center, inverse
+
+# _scales_
+
+- I like the scales package and feel it's worth discussing
+- Includes features like dollar signs, commas, and scientific notation
+- (also, has the _show_col()_ function we used earlier)
+- can be used to change to scientific notation, or not
+- utilities like _comma()_, _dollar()_, _label_number_si()_, _percent()_, _pretty_breaks()_
+- [this is a nice overview](https://bookdown.org/Maxine/ggplot2-maps/posts/2019-11-27-using-scales-package-to-modify-ggplot2-scale/)
+
+---
+
+
+```{r gapminder_plot, echo=T, eval=F, include=F}
+theme_update(legend.position = "none")
+gapminder::gapminder %>%
+  filter(continent == "Americas") %>% #BREAK
+  ggplot(aes(gdpPercap, pop)) + 
+  geom_line(aes(col = country)) +  #BREAK
+  scale_y_log10(labels = label_number_si(unit = " people")) +  #BREAK
+  scale_x_log10(labels = dollar) +  #BREAK
+  theme_minimal() +  #BREAK
+  theme(text = element_text(size = 16), 
+        axis.title.y = element_blank(),
+        legend.position = "bottom",
+        legend.title = element_blank())  #BREAK
+```
+
+`r chunk_reveal("gapminder_plot", break_type = "user")`
+
+---
+
+
+```{r theme-quiz, echo=FALSE}
+xaringanExtra::embed_xaringan(url = "https://eugene-hickey.shinyapps.io/Themes/", ratio = "16:9")
+```
+
+---
+
+```{r homework, echo=FALSE}
+xaringanExtra::embed_xaringan(url = "https://eugene-hickey.shinyapps.io/homework/", ratio = "16:9")
+```
+
+

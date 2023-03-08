@@ -1,0 +1,37 @@
+name: "introduction-to-ggplot"
+title: "Introduction to ggplot"
+description: |
+  An Introduction to ggplot
+output_dir: "."
+theme: theme.css
+navbar:
+  right:
+    - text: "GRS 2023 Workshop"
+      href: "https://www.tudublin.ie/"
+    - text: "Slides"
+      menu:
+        - text: "Morning 10:00-10:30: Getting Started"
+          href: "slides/01-why-ggplot.html"
+        - text: "Morning 10:30-11:00: First Steps in R"
+          href: "slides/02_R.html"
+        - text: "Morning 11:00-12:00: ggplot - Proportions"
+          href: "slides/02-proportions.html"
+        - text: "Morning 12:00-13:00 ggplot - Distributions/Relationships"
+          href: "slides/03-distributions-relationships.html"
+        - text: "Afternoon 14:00-15:00: Colours & Facets"
+          href: "slides/04-colours.html"
+        - text: "Afternoon 15:00-16:00: Fonts & Themes"
+          href: "slides/05-themes.html"
+    - icon: fab fa-youtube
+      href: "https://www.fizzics.ie"
+    - icon: fab fa-twitter
+      href: "https://twitter.com/eugene100hickey"
+    - icon: fab fa-github
+      href: "https://github.com/eugene100hickey"
+creative_commons: CC BY-SA
+repository_url: https://github.com/eugene100hickey
+output:
+  distill::distill_article:
+    toc: true
+    toc_float: true
+favicon: slides/img/clock-tower.ico

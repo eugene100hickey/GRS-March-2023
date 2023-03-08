@@ -65,10 +65,10 @@ d-appendix {
 
 .distill-site-header {
   --title-size:       18px;
-  --text-color:       #f6ea00;
+  --text-color:       white;
   --text-size:        16px;
   --hover-color:      white;
-  --bkgd-color:       #0078bc;
+  --bkgd-color:       #004c6c;
 }
 
 .distill-site-footer {
@@ -84,12 +84,12 @@ d-appendix {
 /* Change bullets */
 ul > li::marker {
   font-size: 1.125em;
-  color: #e5bf00;
+  color: white;
 }
 
 /* Change link appearance */
 d-article a {
-  border-bottom: 1.5px solid #e5bf00;
+  border-bottom: 1.5px solid white;
   text-decoration: none;
 }
 

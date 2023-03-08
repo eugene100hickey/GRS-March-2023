@@ -7,7 +7,7 @@ author:
   affiliation_url: https://www.tudublin.ie
 date: "`r Sys.Date()`"
 description: |
-  An Introduction to Data Visualisation with ggplot for TU Dublin GRS 2022
+  An Introduction to Data Visualisation with ggplot for TU Dublin GRS 2023
 site: distill::distill_website
 ---
 
@@ -29,7 +29,7 @@ meta() %>%
     description = "An Introduction to ggplot for TUD",
     generator = "xaringan and remark.js"
   ) %>% 
-  meta_name("github-repo" = "eugene100hickey/GRS-2022") %>% 
+  meta_name("github-repo" = "eugene100hickey/GRS-march-2023") %>% 
   meta_social(
     title = "Introduction to ggplot",
     url = "",
@@ -61,41 +61,40 @@ This five-hour hands-on workshop will be a gentle introduction to  [ggplot](http
 - **The Morning** will discuss the overall structure of [ggplot](https://ggplot2.tidyverse.org/reference/ggplot.html) and we'll start doing some initial plots; barcharts, boxplots, histograms, point/line plots.....
 
 <aside>
-Wednesday, March 9th<br/>10-1pm BST ([check your time zone](https://www.worldtimebuddy.com/?qm=1&lid=2964574,360630,524901&h=2964574&date=2022-3-9&sln=10-13&hf=1
-))
+Tuesday, March 14th<br/>10-1pm BST ([check your time zone](https://www.worldtimebuddy.com/?qm=1&lid=2643743,360630,524901&h=2643743&date=2023-3-13&sln=10-17&hf=1))
 </aside>
 
 ```{r embed-xaringan-01, echo=FALSE}
-xaringanExtra::embed_xaringan(url = "https://grs-2022.netlify.app/slides/01-why-ggplot.html", ratio = "16:9")
+xaringanExtra::embed_xaringan(url = "https://grs-2023.netlify.app/slides/01-why-ggplot.html", ratio = "16:9")
 ```
 
 
 ```{r embed-xaringan-01a, echo=FALSE}
-xaringanExtra::embed_xaringan(url = "https://grs-2022.netlify.app/slides/02_R.html", ratio = "16:9")
+xaringanExtra::embed_xaringan(url = "https://grs-2023.netlify.app/slides/02_R.html", ratio = "16:9")
 ```
 
 ```{r embed-xaringan-02, echo=FALSE}
-xaringanExtra::embed_xaringan(url = "https://grs-2022.netlify.app/slides/02-proportions.html", ratio = "16:9")
+xaringanExtra::embed_xaringan(url = "https://grs-2023.netlify.app/slides/02-proportions.html", ratio = "16:9")
 ```
 
 
 ```{r embed-xaringan-03, echo=FALSE}
-xaringanExtra::embed_xaringan(url = "https://grs-2022.netlify.app/slides/03-distributions-relationships.html", ratio = "16:9")
+xaringanExtra::embed_xaringan(url = "https://grs-2023.netlify.app/slides/03-distributions-relationships.html", ratio = "16:9")
 ```
 
 - **The Afternoon** will cover colours, themes, facets, and fonts.
 
 
 ```{r embed-xaringan-04, echo=FALSE}
-xaringanExtra::embed_xaringan(url = "https://grs-2022.netlify.app/slides/04-colours.html", ratio = "16:9")
+xaringanExtra::embed_xaringan(url = "https://grs-2023.netlify.app/slides/04-colours.html", ratio = "16:9")
 ```
 
 
 ```{r embed-xaringan-05, echo=FALSE}
-xaringanExtra::embed_xaringan(url = "https://grs-2022.netlify.app/slides/05-themes.html", ratio = "16:9")
+xaringanExtra::embed_xaringan(url = "https://grs-2023.netlify.app/slides/05-themes.html", ratio = "16:9")
 ```
 <aside>
-Wednesday, March 9th<br/>2-4pm BST ([check your time zone](https://www.worldtimebuddy.com/?qm=1&lid=2964574,360630,524901&h=2964574&date=2022-3-9&sln=14-16&hf=1))
+Tuesday, March 14th<br/>2-4pm BST ([check your time zone](https://www.worldtimebuddy.com/?qm=1&lid=2643743,360630,524901&h=2643743&date=2023-3-13&sln=10-17&hf=1))
 </aside>
 
 This workshop is designed for people looking for new tools to present their data.

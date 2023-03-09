@@ -265,23 +265,25 @@ class: center, inverse
     - add _geom_smooth(method = "loess", se = FALSE) +_
     - add _scale_x_log10() +_
     - add _theme_minimal() +_
-    - add _labs(title = "My First Plot", caption = "@Data_Vis_2020")_
+    - add _labs(title = "My First Plot", caption = "@Data_Vis_2023")_
     
-<!-- --- -->
 
-<!-- ```{r first-plot, echo=FALSE} -->
-<!-- xaringanExtra::embed_xaringan(url = "https://eugene-hickey.shinyapps.io/01-colours/", ratio = "16:9") -->
-<!-- ``` -->
-
----
-
-```{r the_first_plot, echo = T, message=F, warning=F, fig.height=6, fig.width=10}
-Puromycin %>% 
+```{r the_first_plot, echo = T, message=F, warning=F}
+first_plot <- Puromycin %>% 
   ggplot(aes(x = conc, y = rate, col = state)) + 
   geom_point() + 
   geom_smooth(method = "loess", se = F) + 
   scale_x_log10() + 
   theme_minimal() + 
-  labs(title = "My First Plot", caption = "@Data_Vis_2020")
+  labs(title = "My First Plot", caption = "@Data_Vis_2023")
 ```
 
+---
+
+## About Time We Did a Plot
+
+```{r echo = F, fig.height=4, fig.width=6, eval=T}
+first_plot
+```
+
+...

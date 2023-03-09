@@ -279,18 +279,18 @@ irish_counties <- data_frame(county = county,
 irish_counties <- irish_counties[-c(5, 6, 10),]
 irish_counties$county[6] <- "Derry"
 
-# ireland_grid <- read_csv("/home/eugene/Desktop/Academic/Research/R_Fun/Irish_counties/ireland.csv")
-# 
-# irish_counties %>% ggplot(aes(1, change, fill = province)) +
-#   geom_col() +
-#   facet_geo(~county, grid = ireland_grid) +
-#   theme(axis.text.x = element_blank(),
-#         panel.background = element_rect(fill = "darkgreen"),
-#         panel.grid = element_blank()) +
-#   scale_fill_manual(values = c("lightgreen", "blue", "red", "white")) +
-#   guides(fill = F) +
-#   labs(title = "Population Growth in Ireland by County",
-#        caption = "@Data wikipedia")
+ireland_grid <- read_csv("data/ireland.csv")
+
+irish_counties %>% ggplot(aes(1, change, fill = province)) +
+  geom_col() +
+  facet_geo(~county, grid = ireland_grid) +
+  theme(axis.text.x = element_blank(),
+        panel.background = element_rect(fill = "darkgreen"),
+        panel.grid = element_blank()) +
+  scale_fill_manual(values = c("lightgreen", "blue", "red", "white")) +
+  guides(fill = F) +
+  labs(title = "Population Growth in Ireland by County",
+       caption = "@Data wikipedia")
 ```
 
 

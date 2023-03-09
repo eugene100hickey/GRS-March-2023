@@ -28,15 +28,16 @@ navbar:
           href: "slides/06-maps"
     - text: "Exercises"
       menu:
-        - text: "workshops/02_workshop.html"
         - text: "Morning 11:00 First Steps in R"
-          href: "workshops/03_workshop.html"
+          href: "workshops/02_workshop.html"
         - text: "Morning 11:30: ggplot - Proportions"
-          href: "workshops/04_workshop.html"
+          href: "workshops/03_workshop.html"
         - text: "Morning 12:30: ggplot - Distributions/Relationships"
-          href: "workshops/05_workshop.html"
+          href: "workshops/04_workshop_2020.html"
         - text: "Afternoon 14:00: dplyr"
-          href: "workshops/05_workshop.html"
+          href: "workshops/05_workshop_2000.html"
+        - text: "Afternoon 15:00: dplyr"
+          href: "workshops/06_workshop_2000.html"
     - icon: fab fa-youtube
       href: "https://www.fizzics.ie"
     - icon: fab fa-twitter

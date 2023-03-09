@@ -9,7 +9,7 @@ output:
 
 class: center, inverse
 
-# Workshop - Week Eight
+# Workshop - Maps
 
 ### Perform the Following Tasks:
 

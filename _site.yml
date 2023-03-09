@@ -36,7 +36,7 @@ navbar:
           href: "workshops/04_workshop_2020.html"
         - text: "Afternoon 14:00: dplyr"
           href: "workshops/05_workshop_2000.html"
-        - text: "Afternoon 15:00: dplyr"
+        - text: "Afternoon 15:00: maps"
           href: "workshops/06_workshop_2000.html"
     - icon: fab fa-youtube
       href: "https://www.fizzics.ie"

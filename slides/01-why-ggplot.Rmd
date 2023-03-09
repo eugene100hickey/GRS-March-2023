@@ -1,7 +1,7 @@
 ---
 title: "GRS Workshop<br>Introduction to ggplot"
 subtitle: "Getting starting - why ggplot?"
-session: "10:00-11:00"
+session: "10:00-10:30"
 author: "Eugene Hickey"
 institute: "Technological University Dublin"
 date: "March 14th 2023"
@@ -36,10 +36,10 @@ meta() %>%
     description = "An Introduction ggplot",
     generator = "xaringan and remark.js"
   ) %>% 
-  meta_name("github-repo" = "eugene100hickey/grs-2022") %>% 
+  meta_name("github-repo" = "eugene100hickey/grs-march-2023") %>% 
   meta_social(
     title = "Introduction to ggplot",
-    url = "https://grs-2022.netlify.app",
+    url = "https://grs-2023.netlify.app",
     image = "https://github.com/eugene100hickey/blob/main/moon.png",
     image_alt = "Front page for Introduction to ggplot",
     og_type = "website",
@@ -60,6 +60,7 @@ library(xaringanExtra)
 # library(NHSRdatasets)
 library(flipbookr)
 library(factoextra)
+library(showtext)
 # set default options
 opts_chunk$set(echo=FALSE,
                collapse = TRUE,
@@ -258,11 +259,50 @@ class: top
 
 ---
 
+```{r}
+font_add_google(name = "Indie Flower", family = "Indie Flower")
+showtext_auto()
+k_USA <- kmeans(USArrests %>% scale(), centers = 4, nstart = 25)
+fviz_cluster_example <- fviz_cluster(k_USA, USArrests %>% scale(), repel = T, stand = TRUE, labelsize = 48) 
+theme_bluewhite <- function (base_size = 11, 
+                             base_family = "Indie Flower") 
+  {
+    theme_bw() %+replace% 
+    theme( text = element_text(size = base_size, family = base_family),
+      panel.grid.major  = element_line(color = "white"),
+      panel.background = element_rect(fill = "lightblue"),
+      panel.border = element_rect(color = "lightblue", fill = NA),
+      axis.line = element_line(color = "lightblue"),
+      axis.ticks = element_line(color = "lightblue"),
+      axis.text = element_text(color = "steelblue")
+      )
+}
+theme_clean <- function() {
+  theme_minimal(base_family = "Indie Flower") +
+    theme(panel.grid.minor = element_blank(),
+          text = element_text(size = 64, family = "Indie Flower"),
+          plot.background = element_rect(fill = "white", color = NA),
+          legend.position = "none",
+          axis.title.x = element_blank(),
+          axis.text.x = element_blank(),
+          axis.title.y = element_blank(),
+          axis.text.y = element_blank())
+}
+```
+
+
 # And others, that make ggplots that can then be modified and treated as such
 
-```{r}
-pi
+.pull-left[
+```{r, echo = T}
+fviz_cluster_example
 ```
+]
+.pull-right[
+```{r echo = T, cache = F}
+fviz_cluster_example + theme_clean()
+```
+]
 
 
 
@@ -317,7 +357,7 @@ class: center, inverse
 
 ---
 
-<img src="images/rstudio.PNG" height="600px" width="800px" align="center"/> 
+<img src="img/rstudio.PNG" height="600px" width="800px" align="center"/> 
 
 ---
 
@@ -384,7 +424,7 @@ class: center, inverse
     - check out the list of online books at [bookdown.org](bookdown.org)
 
 
-<img src="images/hadley.jpg" height="100px" width="100px" align="right"/>
+<img src="img/hadley.jpg" height="100px" width="100px" align="right"/>
 
 ---
 
@@ -416,7 +456,7 @@ class: center, inverse
 <br/>
 <br/>
 
-<img src="images/hillary.jpeg" height="100px" width="100px" align="right"/>
+<img src="img/hillary.jpeg" height="100px" width="100px" align="right"/>
     
     
 ---
@@ -433,7 +473,7 @@ class: center, inverse
 <br/>
 <br/>
 
-<img src="images/rafael.jpg" height="100px" width="100px" align="right"/>
+<img src="img/rafael.jpg" height="100px" width="100px" align="right"/>
     
 ---
 
@@ -457,8 +497,7 @@ class: center, inverse
     - [colours in R](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/colorPaletteCheatsheet.pdf)
     - cool book on good graphics from [Stephen Few](https://nces.ed.gov/programs/slds/pdf/08_F_06.pdf)
     - [The Glamour of Graphics](https://www.williamrchase.com/slides/assets/player/KeynoteDHTMLPlayer.html#0) talk from last months RStudio Conference
-   
----
+
 
 
 

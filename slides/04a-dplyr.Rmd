@@ -1,0 +1,411 @@
+---
+title: "GRS Workshop<br>Introduction to ggplot"
+subtitle: "Data Wrangling - dplyr"
+session: "14:00-14:30"
+author: "Eugene Hickey"
+institute: "Technological University Dublin"
+date: "March 14th 2023"
+output:
+  xaringan::moon_reader:
+    css: 
+      - default
+      - css/mytheme.css
+      - css/mytheme-fonts.css
+    lib_dir: libs
+    includes:
+      in_header: favicon.html
+    seal: false
+    self_contained: true
+    nature:
+      highlightStyle: googlecode
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "macros.js"
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+---
+
+```{r meta, echo=FALSE, message=FALSE, warning=FALSE}
+library(metathis)
+meta() %>%
+  meta_general(
+    description = "An Introduction ggplot",
+    generator = "xaringan and remark.js"
+  ) %>% 
+  meta_name("github-repo" = "eugene100hickey/grs-march-2023") %>% 
+  meta_social(
+    title = "Introduction to ggplot",
+    url = "https://grs-2023.netlify.app",
+    image = "img/yosemite.JPG",
+    image_alt = "Front page for Introduction to ggplot",
+    og_type = "website",
+    og_author = "Eugene Hickey",
+    twitter_card_type = "summary_large_image",
+    twitter_creator = "@eugene100hickey"
+  )
+```
+
+
+
+
+```{r setup, include = FALSE}
+# .libPaths(c(.libPaths(), "C:\\Users\\ehickey\\OneDrive - Technological University Dublin\\Documents\\R\\win-library\\4.0"))
+
+options(htmltools.dir.version = FALSE)
+library(tidyverse)
+library(scales)
+library(gapminder)
+library(ggrepel)
+library(glue)
+library(waffle)
+library(treemapify)
+library(ggridges)
+library(lubridate)
+library(boxoffice)
+library(knitr)
+library(xaringanExtra)
+library(flipbookr)
+library(factoextra)
+library(ggtext)
+library(hrbrthemes)
+library(HistData)
+library(patchwork)
+library(dslabs)
+library(ggalt)
+# set default options
+opts_chunk$set(echo=FALSE,
+               collapse = TRUE,
+               # fig.width = 7.252,
+               # fig.height = 4,
+               dpi = 300,
+               cache = TRUE,
+               message = FALSE,
+               warning = FALSE)
+
+xaringanExtra::use_tile_view()
+xaringanExtra::use_panelset()
+xaringanExtra::use_clipboard()
+xaringanExtra::use_webcam()
+xaringanExtra::use_broadcast()
+xaringanExtra::use_share_again()
+xaringanExtra::style_share_again(
+  share_buttons = c("twitter", "linkedin", "pocket")
+)
+
+```
+
+```{r theme, cache = F}
+
+my_colour = "firebrick4"
+ggplot2::theme_set(ggplot2::theme_minimal())
+ggplot2::theme_update(text = ggplot2::element_text(family = "Ink Free", 
+                                 size = 20, 
+                                 colour = my_colour),
+             axis.text = ggplot2::element_text(colour = my_colour),
+             rect = element_rect(colour = my_colour),
+             line = element_line(colour = my_colour))
+caption = "@DataVis_2020 Eugene"
+
+my_ordinal_date <- function(dates){
+     dayy <- day(dates)
+     suff <- case_when(dayy %in% c(11,12,13) ~ "th",
+                       dayy %% 10 == 1 ~ 'st',
+                       dayy %% 10 == 2 ~ 'nd',
+                       dayy %% 10 == 3 ~'rd',
+                       TRUE ~ "th")
+     paste0(dayy, suff)
+ }
+
+basketball <- read_csv("data/basketball.csv")
+```
+
+class: title-slide, right, top
+background-image: url(img/yosemite.JPG)
+background-position: 90% 75%, 75% 75%
+background-size:cover
+
+.left-column[
+# `r rmarkdown::metadata$title`
+] 
+
+.right-column[
+### `r rmarkdown::metadata$subtitle`
+
+**`r rmarkdown::metadata$author`**<br>
+`r rmarkdown::metadata$date`
+]
+
+
+.palegrey[.left[.footnote[Graphic by [Lilian Hickey](https://photos.google.com/photo/AF1QipMjKNoaxyne8nte4HmxA6Th9-4fUfSbl_mx-_1G)]]]
+
+???
+
+Welcome to the workshop on ggplot.
+
+Where we'll show you how to create impressive data visualisations.
+
+---
+
+layout: true
+
+<a class="footer-link" href="http://grs-2023.netlify.app">GRS 2023 &mdash; Eugene Hickey</a>
+
+<!-- this adds the link footer to all slides, depends on footer-link class in css-->
+
+---
+
+class: center, inverse
+
+## _dplyr_ Six Verbs - and how to combine them
+
+<ol>
+<li> filter
+<li> select
+<li> mutate
+<li> arrange
+<li> group_by
+<li> summarise (or summarize)
+<li> and, of course, the pipe _%>%_ 
+---
+
+## filter
+
+- used to choose some rows from a dataframe
+- pass in the dataframe and some logical condition
+    - could be _==_ (note the double equals), for characters and _<_, _>_ for numerics
+    - also _<=_, _>=_, _!_ (for NOT)
+    - can use _between()_
+    - I like _%in%_
+- can have multiple logical conditions in the same filter
+
+```{r libraries, message=F, warning=F, echo=FALSE}
+library(tidyverse)
+library(gapminder)
+library(knitr)
+library(kableExtra)
+```
+
+---
+
+.pull-left[
+<br>
+<br>
+<br>
+<br>
+
+```{r filter_example}
+# you'll need the libraries: tidyverse, gapminder, and knitr
+gapminder::gapminder %>% 
+  dplyr::filter(continent == "Africa", 
+         between(pop, 20e6, 50e6), 
+         year %in% c(1952:1964)) %>% 
+  kable()
+```
+
+]
+.pull-right[
+![@Allison_Horst](img/dplyr_filter.jpg)
+]
+
+---
+
+## select
+
+- used to pick out columns from a dataframe
+- pass in the dataframe and one or more columns
+    - can _deselect_ columns with a minus sign
+
+
+.pull-left[
+
+```{r select1_example}
+gapminder::gapminder %>% 
+  select(country, year, lifeExp) %>% 
+  head() %>% 
+  kable()
+```
+
+]
+
+.pull-right[
+
+```{r select2_example}
+gapminder::gapminder %>% 
+  select(-c(continent, pop)) %>% 
+  head() %>% kable()
+```
+
+]
+
+---
+
+.pull-left[
+
+## mutate
+
+- makes new columns
+- same number of rows
+- pass in dataframe and instructions
+]
+
+.pull-right[
+![@Allison_Horst](img/dplyr_mutate.png)
+
+]
+
+```{r mutate_example}
+gapminder::gapminder %>% 
+  mutate(total_gdp_billions = pop * gdpPercap / 1e9) %>% 
+  head() %>% kable()
+```
+
+---
+
+## arrange
+
+- used to order columns
+    - normally increasing, use _desc()_ to reverse
+    
+.pull-left[
+
+```{r arrange1_example}
+gapminder::gapminder %>% 
+  select(country, year, pop) %>% 
+  arrange(pop) %>% 
+  head() %>% kable()
+```
+
+]
+.pull-right[
+
+```{r arrange2_example}
+gapminder::gapminder %>% 
+  select(country, year, pop) %>% 
+  arrange(desc(pop)) %>% 
+  head() %>% kable()
+```
+
+]
+---
+
+## group_by and summarise
+
+- always(ish) go hand in hand
+- _group_by()_ reduces number of rows
+- _summarise()_ makes new columns
+- always use _ungroup()_ when you're finished
+
+<center>
+
+<img src = "img/group_by_ungroup.png" alt="@Allison_Horst" width="300" height="200"/>
+
+</center>
+
+---
+
+```{r group_by_example, fig.height=4, fig.width=8}
+gapminder::gapminder %>% 
+  group_by(continent, year) %>% 
+  summarise(mean_lifeExp = mean(lifeExp)) %>% ungroup() %>% 
+  ggplot(aes(year, mean_lifeExp, col = continent)) + 
+  geom_line() + geom_point()
+```
+
+---
+
+## The Pipe - %>% 
+
+- neat feature, takes a bit of getting used to 
+- but makes life way simpler and code more readable
+- chains operations together
+- read it in your head as _"and then..."_
+- alternatives are, well, ugly. And unforgiving.
+
+---
+
+## The Pipe - %>% continued
+
+- we've used it extensively so far, and can go even further
+- basic idea is that you send the output from one line into the first (unnamed) argument of the next
+- keyboard shortcut, one worth knowing, is Ctrl + Shift + M
+- if you're really interested, other pipes such as the T-pipe(%T%) and the dollar pipe (%$%)
+
+---
+
+## a bit more dplyr
+
+- the function _distinct()_
+    - gets rid of duplicate rows
+- the function _rename()_ changes names of columns
+- the function _relocate()_ changes order of columns
+- and _left_join()_ links dataframes together (a.k.a. SQL)
+
+---
+
+class: center, inverse
+
+# Wide and Long Dataframe Formats
+
+---
+
+## Tidy Data (the _tidyr_ package)
+
+- idea of tidy data
+    - each variable must have it's own column
+    - each observation it's own row
+    - each value it's own cell
+
+```{r pivot1}
+palmerpenguins::penguins %>% select(species, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g) |> 
+  pivot_longer(cols = -species, names_to = "Parameter", values_to = "Measurement") %>%
+  head(15) %>% knitr::kable()
+```
+
+---
+
+![@Allison_Horst](img/tidydata_1.jpg)
+
+---
+
+![@Allison_Horst](img/tidydata_1.jpg)
+
+---
+
+![@Allison_Horst](img/tidydata_1.jpg)
+
+---
+
+![@Allison_Horst](img/tidydata_2.jpg)
+
+---
+
+![@Allison_Horst](img/tidydata_3.jpg)
+
+---
+
+![@Allison_Horst](img/tidydata_4.jpg)
+
+---
+
+![@Allison_Horst](img/tidydata_5.jpg)
+
+---
+
+![@Allison_Horst](img/tidydata_6.jpg)
+
+---
+
+![@Allison_Horst](img/tidydata_7.jpg)
+
+---
+
+```{r pivot2}
+gapminder::gapminder %>% select(country, year, lifeExp) %>% 
+  pivot_wider(names_from = "year", values_from = "lifeExp") %>% 
+  head(15) %>% kable()
+```
+

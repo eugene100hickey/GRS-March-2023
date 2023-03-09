@@ -97,7 +97,7 @@ xaringanExtra::style_share_again(
 ```
 
 class: title-slide, right, top
-background-image: url(img/horn.JPG)
+background-image: url(img/half-dome.JPG)
 background-position: 90% 75%, 75% 75%
 background-size:cover
 
@@ -113,7 +113,7 @@ background-size:cover
 ]
 
 
-.palegrey[.left[.footnote[Graphic by [Elaine Hickey](https://photos.google.com/photo/AF1QipMjKNoaxyne8nte4HmxA6Th9-4fUfSbl_mx-_1G)]]]
+.palegrey[.left[.footnote[Graphic by [Lilian Hickey](https://photos.google.com/photo/AF1QipMjKNoaxyne8nte4HmxA6Th9-4fUfSbl_mx-_1G)]]]
 
 ???
 

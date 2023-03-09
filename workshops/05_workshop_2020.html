@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Data Visualisation</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Eugene" />
+    <script src="05_workshop_2020_files/header-attrs-2.20/header-attrs.js"></script>
+    <link href="05_workshop_2020_files/remark-css-0.0.1/TUD_workshop.css" rel="stylesheet" />
+    <link href="05_workshop_2020_files/remark-css-0.0.1/tamu-fonts.css" rel="stylesheet" />
+    <script src="05_workshop_2020_files/kePrint-0.0.1/kePrint.js"></script>
+    <link href="05_workshop_2020_files/lightable-0.0.1/lightable.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Data Visualisation
+]
+.author[
+### Eugene
+]
+.date[
+### March 09 2023
+]
+
+---
+
+
+class: center, inverse
+
+# Workshop - dplyr
+
+### Perform the Following Tasks:
+
+
+__*Problem 1*__
+
+Take the _us_contagious_diseases_ dataset from the _dslabs_ library. _filter()_ the dataset for the disease _Smallpox_ in the state of _Wisconsin_. This should give you 25 rows. Use this to produce the plot below.
+
+![](05_workshop_2020_files/figure-html/filter-1.png)&lt;!-- --&gt;
+
+---
+
+class: center, inverse
+
+__*Problem 2*__
+
+Take the _research_funding_rates_ dataset from the _dslabs_ library. Use _select()_ to print out the dataset with only the columns _discipline_, _success_rates_men_, and _success_rates_women_. The dataframe should look as below:
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; discipline &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; success_rates_men &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; success_rates_women &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Chemical sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 25.6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Physical sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 23.1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Physics &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 22.2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Humanities &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Technical sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Interdisciplinary &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Earth/life sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Social sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Medical sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.2 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+class: center, inverse
+
+__*Problem 3*__
+
+Take the table from problem 2 and use _arrange(desc())_ to modify it so that the rows are ordered by decreasing values of _applications_total_
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; discipline &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; success_rates_men &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; success_rates_women &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Social sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Medical sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.2 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Humanities &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Earth/life sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 24.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.3 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Technical sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Interdisciplinary &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Physical sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 19.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 23.1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Chemical sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 25.6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Physics &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 26.9 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 22.2 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+class: center, inverse
+
+__*Problem 4*__
+
+Again, take the _research_funding_rates_ dataset from the _dslabs_ library. Make a new column using _mutate()_ that shows the overall success rate for each discipline. Print out the dataset with only the columns _discipline_ and _success_rates_, ordered by success rate. The dataframe should look as below:
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; discipline &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; success_rate &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Physics &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.263 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Chemical sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.262 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Physical sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.201 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Earth/life sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.199 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Technical sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.171 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Humanities &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.164 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Interdisciplinary &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.158 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Medical sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.149 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Social sciences &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.134 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+class: center, inverse
+
+__*Problem 5*__
+
+Take the _polls_us_election_2016_ dataset from the _dslabs_ library. _group_by()_ the _grade_ column and _summarise()_ to calculate the average sample size for each grade. _arrange(desc())_ the table in decreasing _average_sample_size_. The dataframe should look as below:
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; grade &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; average_sample_size &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; A+ &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 733 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; A &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 944 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; A- &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 759 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; B+ &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 896 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; B &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 974 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; B- &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1263 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C+ &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 972 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 717 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; C- &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1870 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; D &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1097 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+Take the output from this dataframe and make a barchart
+---
+
+class: center, inverse
+
+__*Problem 6*__
+
+
+Take the _msleep_ dataset from the _ggplot2_ library. Get rid of incomplete rows (use _msleep %&gt;% drop_na()_). Use _select(-c())_ to get rid of the _genus_, _vore_, _order_, _conservation_, _brainwt_, and _bodywt_ columns. Make this in to a long form data frame with columns, _name_, _type_of_sleep_, and _hours_ using the _pivot_longer()_ command setting _col_ to _-name_, _names_to_ to _type_of_sleep_ , and _values_to_ to _hours_. The dataframe should look as below:
+
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; name &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; type_of_sleep &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; hours &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Big brown bat &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; sleep_total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 20.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Big brown bat &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; sleep_rem &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.90 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Big brown bat &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; sleep_cycle &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.12 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Big brown bat &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; awake &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.30 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; North American Opossum &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; sleep_total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; North American Opossum &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; sleep_rem &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.90 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; North American Opossum &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; sleep_cycle &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.33 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; North American Opossum &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; awake &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Long-nosed armadillo &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; sleep_total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Long-nosed armadillo &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; sleep_rem &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.10 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Long-nosed armadillo &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; sleep_cycle &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.38 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Long-nosed armadillo &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; awake &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.60 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+- 
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create();
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

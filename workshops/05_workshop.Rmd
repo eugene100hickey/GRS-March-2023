@@ -1,0 +1,42 @@
+---
+title: "Data Visualisation"
+author: "Eugene"
+date: "`r format(Sys.Date(), '%B %d %Y')`"
+output:
+  xaringan::moon_reader:
+    css: [TUD_workshop, tamu-fonts]
+---
+
+class: center, inverse
+
+# Workshop - Week Six
+
+### Perform the Following Tasks:
+
+<ol>
+<li> Find the the hex codes, rgb values, and the hcl values for the following colours: "firebrick4", "seagreen", "moccasin", and "plum3" 
+<li> Display nine colours from the *magma()* palette (from _viridis_ package) using *show_col()*
+<li> Do the same for a diverging palette from *brewer_pal()* [hint, use _brewer_pal(type = "div")(12)_]
+<li> Produce a ggplot of the _iris_ dataset where _Sepal.Length_ is on the x-axis, _Sepal.Width_ on the y, and the points are coloured by _Species_. Choose the colours using _scale_color_manual()_. Pick nice colours using the chart from [Stowers](https://www.uv.es/conesa/CursoR/material/UsingColorInR.pdf) (or from coolor.co)
+<li> Produce a ggplot of the _iris_ dataset where _Sepal.Length_ is on the x-axis, _Sepal.Width_ on the y, and the points are coloured by _Petal.Lenght_. Use _scale_col_gradient2()_ with contracting colours at either end. Make sure to set the _midpoint_ (otherwise it defaults to 0 and the low colour is never seen)
+<li> Draw three side by side histograms of _Sepal.Length_ from the _iris_ dataset, faceting by _Species_
+<li> Produce the plot show overleaf of data from the _gapminder_ dataset. It shows population over years for different countries, faceted by continent. The light blue lines are individual countries, the dark blue line is the fitted line for the continent. Hints: use _geom_line(aes(group = country), col = "lightblue")_ for the country lines, _geom_smooth(se = F)_ for the fitted lines, and a _facet_grid()_ with five columns.
+
+---
+
+```{r facets, echo = F, message=F, warning=F, fig.width=10}
+library(tidyverse)
+library(gapminder)
+gapminder %>% 
+  ggplot(aes(year, pop)) + 
+  geom_line(aes(group = country), col = "lightblue") + 
+  geom_smooth(se = F) + 
+  facet_wrap(~continent, ncol = 5) + 
+  scale_y_log10(label = scales::comma_format()) + 
+  theme_minimal() +
+  theme(panel.grid = element_blank(),
+        text = element_text(size = 20, family = "Ink Free"),
+        axis.text.x = element_text(size = 10)) + 
+  scale_x_continuous(breaks = c(1950, 1970, 1990))
+```
+

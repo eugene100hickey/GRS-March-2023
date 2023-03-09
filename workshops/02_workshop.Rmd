@@ -1,0 +1,29 @@
+---
+title: "Data Visualisation"
+author: "Eugene"
+date: "`r format(Sys.Date(), '%B %d %Y')`"
+output:
+  xaringan::moon_reader:
+    css: [TUD_workshop, tamu-fonts]
+---
+
+class: center, inverse
+
+# Workshop - Introduction to R
+
+### Perform the Following Tasks:
+
+<ol>
+<li> multiply the numbers $25\times \pi$ and save the result to <i>my_first_result</i>
+<li> make a vector of five numbers e.g. 34.1, 54.4, 71.5, 93.8, 22.6 and save them to <i>my_second_result</i> 
+<li> multiply <i>my_second_result</i> by 7 and print the results
+<li> print the <i>Titanic dataset</i>
+<li> examine the <i>Titanic dataset</i> using <i>summary()</i>, <i>str()</i>, and <i>glimpse()</i>. For the latter you'll need the tidyverse library.
+<li> store the values of <i>bodywt</i> from the <i>msleep</i> in a new variable you can call <i>body_weight</i>
+<li> calculate the mean() of <i>fbody_weight</i>
+<li> calculate the standard deviation, sd(), of <i>body_weight</i>
+<li> find the names of the columns in the <i>Puromycin</i> dataset
+<li> look up the help for the <i>USJudgeRatings</i> dataset and find out what is meant by the <i>"DECI"</i> column name
+<li> install and load up the package <i>dslabs</i>. Use <i>is.na()</i> and <i>sum()</i> to find the number of missing values in the <i>us_contagious_diseases</i> dataset
+<li> what kind of variable is stored in <i>olive$area</i>?
+<li> what are the levels of the factor in <i>olive$region</i>?

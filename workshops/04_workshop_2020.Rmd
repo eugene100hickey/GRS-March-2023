@@ -1,0 +1,27 @@
+---
+title: "Data Visualisation"
+author: "Eugene"
+date: "`r format(Sys.Date(), '%B %d %Y')`"
+output:
+  xaringan::moon_reader:
+    css: [TUD_workshop, tamu-fonts]
+---
+
+class: center, inverse
+
+# Workshop - Distributions
+
+### Perform the Following Tasks:
+
+<ol>
+<li> make a histogram of the county areas from the *midwest* dataset from *ggplot2*
+<li> make a density plot of the county areas from the *midwest* dataset from *ggplot2*
+<li> make a density plot of the county areas from the *midwest* dataset from *ggplot2* which has five different lines for each of the five states
+<li> see if you can reproduce the plot using the *midwest* dataset show below. Hint, *scale_x_log10* will be useful
+
+
+```{r pop, echo = F, warning = F, message=F, fig.height=4}
+library(tidyverse)
+midwest %>% ggplot(aes(poptotal)) + geom_histogram() + scale_x_log10()
+```
+

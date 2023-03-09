@@ -1,0 +1,44 @@
+---
+title: "Data Visualisation"
+author: "Eugene"
+date: "`r format(Sys.Date(), '%B %d %Y')`"
+output:
+  xaringan::moon_reader:
+    css: [TUD_workshop, tamu-fonts]
+---
+
+class: center, inverse
+
+# Workshop - Week Eight
+
+### Perform the Following Tasks:
+
+<ol>
+<li> Go to [this](https://www.littlemissdata.com/blog/maps) website and follow the instructions to register for googlemaps (look under the section __ENABLE GOOGLE STATIC MAP SERVICE__). If you'd like to do this just once, include _register_google(key = 'whatever_your_key_is', write = TRUE)_
+<li> Use _get_googlemap()_ to download a map of France. Set the centre to be at lon = 2.44, lat = 47.1, the zoom to be 6, and the maptype to be 'terrain'. Plot this map with ggmap.
+<li> Download the locations of power stations in Europe from the url https://data.open-power-system-data.org/conventional_power_plants/2018-12-20/conventional_power_plants_EU.csv. Filter this dataset for country == "FR" and energy_source == "Nuclear". Use _ggmap()_ and _geom_point()_ to plot the location of these nuclear power stations. Colour the points based on the _capacity_ of the power station.
+<li> Use _leaflet()_ to make an interactive map of the power stations data from exercise 3 above. Colour the station locations based on the _energy_source_ and make their size depend on the station _capacity_. You should attempt this after having done the datacamp course for this week, _Interactive Maps with leaflet in R_.
+<li> Install the package _geofacet_. Use it to plot a facet map of the US with time lines of the unemployment rate by state. Use the _us_state_grid1_ and the dataset _state_unemp_, both in _geofacet_. The picture should look something the one overleaf.
+
+
+---
+
+```{r us, echo = F, message = F, warning = F, fig.width = 11}
+library(tidyverse)
+library(geofacet)
+
+state_unemp %>% ggplot(aes(year, rate)) + 
+  geom_line(size = 2) + 
+  facet_geo(~state, grid = us_state_grid1) + 
+  theme(axis.text = element_blank(), 
+        strip.background = element_rect(fill = "darkblue"),
+        strip.text = element_text(color = "white", family = "Ink Free", face = "bold"),
+        panel.background = element_rect(fill = "red"),
+        panel.grid.major.y = element_line(color = "white", size = 2),
+        panel.grid.minor.y = element_line(color = "white", size = 2),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank(),
+        axis.title = element_blank())
+
+```
+

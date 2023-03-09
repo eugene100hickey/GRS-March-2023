@@ -1,0 +1,136 @@
+---
+title: "Data Visualisation"
+author: "Eugene"
+date: "`r format(Sys.Date(), '%B %d %Y')`"
+output:
+  xaringan::moon_reader:
+    css: [TUD_workshop, tamu-fonts]
+---
+
+class: center, inverse
+
+# Workshop - dplyr
+
+### Perform the Following Tasks:
+
+
+__*Problem 1*__
+
+Take the _us_contagious_diseases_ dataset from the _dslabs_ library. _filter()_ the dataset for the disease _Smallpox_ in the state of _Wisconsin_. This should give you 25 rows. Use this to produce the plot below.
+
+```{r filter, echo = F, message=F, warning=F, fig.height=5}
+library(tidyverse)
+library(dslabs)
+us_contagious_diseases %>% 
+  filter(disease == "Smallpox", state == "Wisconsin") %>% 
+  ggplot(aes(year, count)) + 
+  geom_line(col = "springgreen4") + 
+  geom_point(col = "darkslategrey")
+```
+
+---
+
+class: center, inverse
+
+__*Problem 2*__
+
+Take the _research_funding_rates_ dataset from the _dslabs_ library. Use _select()_ to print out the dataset with only the columns _discipline_, _success_rates_men_, and _success_rates_women_. The dataframe should look as below:
+
+```{r select_example, echo = F, message=F, warning=F}
+library(knitr)
+library(kableExtra)
+
+research_funding_rates %>% 
+  select(discipline, success_rates_men, success_rates_women) %>% 
+  kable() %>% 
+  kable_styling(stripe_color = "palegreen2",
+                bootstrap_options = "striped")
+```
+
+---
+
+class: center, inverse
+
+__*Problem 3*__
+
+Take the table from problem 2 and use _arrange(desc())_ to modify it so that the rows are ordered by decreasing values of _applications_total_
+
+```{r arrange_example, echo = F, message=F, warning=F}
+
+research_funding_rates %>%   
+  arrange(desc(applications_total)) %>% 
+  select(discipline, success_rates_men, success_rates_women)  %>% 
+  kable() %>% 
+  kable_styling(stripe_color = "palegreen2",
+                bootstrap_options = "striped")
+```
+
+---
+
+class: center, inverse
+
+__*Problem 4*__
+
+Again, take the _research_funding_rates_ dataset from the _dslabs_ library. Make a new column using _mutate()_ that shows the overall success rate for each discipline. Print out the dataset with only the columns _discipline_ and _success_rates_, ordered by success rate. The dataframe should look as below:
+
+```{r mutate_example, echo = F, message=F, warning=F}
+
+research_funding_rates %>% 
+  mutate(success_rate = awards_total / applications_total) %>% 
+  select(discipline, success_rate) %>% 
+  mutate(success_rate = success_rate %>% round(3)) %>% 
+  arrange(desc(success_rate)) %>% 
+  kable() %>% 
+  kable_styling(stripe_color = "palegreen2",
+                bootstrap_options = "striped")
+```
+
+---
+
+class: center, inverse
+
+__*Problem 5*__
+
+Take the _polls_us_election_2016_ dataset from the _dslabs_ library. _group_by()_ the _grade_ column and _summarise()_ to calculate the average sample size for each grade. _arrange(desc())_ the table in decreasing _average_sample_size_. The dataframe should look as below:
+
+```{r group_example, echo = F, message=F, warning=F}
+polls_us_election_2016 %>% 
+  group_by(grade) %>% 
+  summarise(average_sample_size = mean(samplesize, na.rm = T) %>% round(0)) %>% 
+  arrange(desc(grade)) %>% drop_na() %>% 
+  kable() %>% 
+  kable_styling(stripe_color = "palegreen2",
+                bootstrap_options = "striped")
+
+```
+
+Take the output from this dataframe and make a barchart
+---
+
+class: center, inverse
+
+__*Problem 6*__
+
+
+Take the _msleep_ dataset from the _ggplot2_ library. Get rid of incomplete rows (use _msleep %>% drop_na()_). Use _select(-c())_ to get rid of the _genus_, _vore_, _order_, _conservation_, _brainwt_, and _bodywt_ columns. Make this in to a long form data frame with columns, _name_, _type_of_sleep_, and _hours_ using the _pivot_longer()_ command setting _col_ to _-name_, _names_to_ to _type_of_sleep_ , and _values_to_ to _hours_. The dataframe should look as below:
+
+
+```{r pivot_example, echo = F, message=F, warning=F}
+msleep %>% 
+  drop_na() %>% 
+  select(-c("genus", "vore", "order", "conservation", "brainwt", bodywt)) %>% 
+  arrange(desc(sleep_total)) %>% 
+  head(3) %>% 
+  pivot_longer(cols = -name,
+               names_to = "type_of_sleep", 
+               values_to = "hours") %>% 
+  mutate(hours = hours %>% signif(2)) %>% 
+  kable() %>% 
+  kable_styling(stripe_color = "palegreen2",
+                bootstrap_options = "striped")
+
+```
+
+
+
+- 

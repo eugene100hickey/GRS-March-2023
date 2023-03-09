@@ -1,0 +1,33 @@
+---
+title: "Data Visualisation"
+author: "Eugene"
+date: "`r format(Sys.Date(), '%B %d %Y')`"
+output:
+  xaringan::moon_reader:
+    css: [TUD_workshop, tamu-fonts]
+---
+
+class: center, inverse
+
+# Workshop - Proportions
+
+### Perform the Following Tasks:
+
+<ol>
+<li> you have a dataset with the counties of Ireland in one column and their populations in a second column. To produce a bar chart, should you use *geom_col()* or *geom_bar()*?
+<li> make a bar chart of the number of counties in each of the five US midwest states. Use the *midwest* dataset from *ggplot2*
+<li> make a bar chart of the number of each species of pengiun from the *penguins* dataset in *palmerpenguins* (you can *install.packages("palmerpenguins")* from CRAN)
+<li> make a bar chart of the 12 *Carnivora* total sleep times from the *msleep* dataset in *ggplot2*
+<li> make a lollipop plot of the 12 *Primates* total sleep times from the *msleep* dataset in *ggplot2*
+<li> install the *boxoffice* package. Use the following commands to downloads box office receipts from this day last week:
+
+```
+library(boxoffice)
+boxoffice_date <- Sys.Date()-7
+movies <- boxoffice(boxoffice_date) %>% 
+     mutate(gross = gross / 1e3,
+            movie_name = movie,
+            movie = abbreviate(movie)) %>% 
+     head()
+```
+Plot a pie chart of gross receipt for these top six films
